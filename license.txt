@@ -1,0 +1,7 @@
+Copyright (c) 2026 Kalyan Bakuli. All rights reserved.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files, to use the software without restriction, including the rights to run the software for personal or internal business use.
+Restrictions:
+• You may not modify, alter, adapt, or create derivative works of this software.
+• You may not sell, rent, lease, sublicense, or otherwise commercially exploit this software.
+• You must include this copyright notice in all copies of the software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
