@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4TH STREET DINING HALL - SALT LAKE (GROCERY & REQUISITION)</title>
+  <title>4th Street Dining Hall - Salt Lake (Grocery & Requisition System)</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -75,10 +75,10 @@
     <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full border border-slate-200 dark:border-slate-700">
       <div class="text-center mb-6">
         <div class="w-16 h-16 bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-inner">
-          <i data-lucide="shield-lock" class="w-8 h-8"></i>
+          <i data-lucide="shield-check" class="w-8 h-8"></i>
         </div>
-        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" id="authTitleDisplay">4TH STREET DINING HALL</h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">SALT LAKE (GROCERY) - Access Verification</p>
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white" id="authTitleDisplay">4th Street Dining Hall</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Salt Lake (Grocery & Requisition) — Access Verification</p>
       </div>
 
       <form id="authForm" onsubmit="handleTokenSubmit(event)" class="space-y-4">
@@ -105,7 +105,7 @@
           class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl shadow-lg shadow-brand-600/30 transition transform active:scale-95 flex items-center justify-center gap-2"
         >
           <i data-lucide="key-round" class="w-5 h-5"></i>
-          Unlock System (90 Days License)
+          Unlock System (90-Day License)
         </button>
       </form>
       <div class="mt-6 text-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-700 pt-4">
@@ -128,7 +128,7 @@
           </div>
           <div>
             <h1 id="headerCompanyName" class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">
-              4TH STREET DINING HALL - SALT LAKE (GROCERY)
+              4th Street Dining Hall - Salt Lake (Grocery)
             </h1>
             <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
               <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
@@ -136,7 +136,7 @@
                 <span id="tokenExpiryStatus">License Active</span>
               </span>
               <span>•</span>
-              <span id="totalItemsBadge">135 Catalog Items</span>
+              <span id="totalItemsBadge">0 Items</span>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@
           <!-- Order History Button -->
           <button onclick="openHistoryModal()" class="flex items-center gap-1.5 px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-xl shadow transition">
             <i data-lucide="history" class="w-4 h-4"></i>
-            <span class="hidden sm:inline">Order History</span>
+            <span class="hidden sm:inline">Order History & Analytics</span>
           </button>
 
           <!-- Dark Mode Toggle -->
@@ -168,12 +168,12 @@
           </button>
 
           <!-- Settings Button -->
-          <button onclick="openSettingsModal()" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Settings & Passcode Info">
+          <button onclick="openSettingsModal()" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Settings & Data Backup">
             <i data-lucide="settings" class="w-5 h-5"></i>
           </button>
 
           <!-- Logout / Lock Button -->
-          <button onclick="revokeToken()" class="p-2 rounded-xl text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition" title="Lock App / Change Token">
+          <button onclick="revokeToken()" class="p-2 rounded-xl text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition" title="Lock System">
             <i data-lucide="log-out" class="w-5 h-5"></i>
           </button>
 
@@ -200,7 +200,7 @@
             <i data-lucide="clipboard-list" class="w-4 h-4 text-brand-600"></i>
             Requisition Order Details
           </div>
-          <span class="text-xs text-slate-400">Fill before export/printing</span>
+          <span class="text-xs text-slate-400">Complete before exporting or printing</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -210,9 +210,165 @@
             <input type="date" id="reqDate" class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 px-3 py-2 text-xs text-slate-800 dark:text-white focus:ring-2 focus:ring-brand-500 focus:outline-none" />
           </div>
 
-          <!-- Requisitioner Name Dropdown + Custom Input -->
+          <!-- Requisitioner Name Dropdown -->
           <div>
             <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Requisitioner Name</label>
+            <div class="space-y-1.5">
+              <select id="reqNameSelect" onchange="handleReqNameSelect(this.value)" class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 px-3 py-2 text-xs text-slate-800 dark:text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="Executive Chef">Executive Chef</option>
+                <option value="Head Chef">Head Chef</option>
+                <option value="Sous Chef">Sous Chef</option>
+                <option value="Store Manager">Store Manager</option>
+                <option value="Kitchen In-Charge">Kitchen In-Charge</option>
+                <option value="Banquet Manager">Banquet Manager</option>
+                <option value="Purchasing Officer">Purchasing Officer</option>
+                <option value="CUSTOM">+ Enter Custom Name...</option>
+              </select>
+              <input type="text" id="reqNameCustom" placeholder="Type Requisitioner Name" class="hidden w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 px-3 py-1.5 text-xs text-slate-800 dark:text-white focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            </div>
+          </div>
+
+          <!-- Department -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Department</label>
+            <select id="reqDept" class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 px-3 py-2 text-xs text-slate-800 dark:text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="Main Kitchen">Main Kitchen</option>
+              <option value="Store / Pantry">Store / Pantry</option>
+              <option value="Butchery & Seafood">Butchery & Seafood</option>
+              <option value="Vegetable Pantry">Vegetable Pantry</option>
+              <option value="Bakery & Desserts">Bakery & Desserts</option>
+              <option value="Banquet / Catering">Banquet / Catering</option>
+              <option value="Service & Dining">Service & Dining</option>
+            </select>
+          </div>
+
+          <!-- Notes with Presets -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Notes / Instructions</label>
+            <input type="text" id="reqNotes" placeholder="Select preset or type notes..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 px-3 py-2 text-xs text-slate-800 dark:text-white focus:ring-2 focus:ring-brand-500 focus:outline-none mb-1.5" />
+            
+            <div class="flex flex-wrap gap-1">
+              <button type="button" onclick="appendNotePreset('Urgent Morning Delivery')" class="text-[10px] bg-slate-100 dark:bg-slate-700 hover:bg-brand-100 dark:hover:bg-brand-900/50 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-md transition border border-slate-200 dark:border-slate-600">⚡ Urgent Morning</button>
+              <button type="button" onclick="appendNotePreset('For Evening Banquet')" class="text-[10px] bg-slate-100 dark:bg-slate-700 hover:bg-brand-100 dark:hover:bg-brand-900/50 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-md transition border border-slate-200 dark:border-slate-600">🎉 Evening Banquet</button>
+              <button type="button" onclick="appendNotePreset('Fresh Stock Required')" class="text-[10px] bg-slate-100 dark:bg-slate-700 hover:bg-brand-100 dark:hover:bg-brand-900/50 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-md transition border border-slate-200 dark:border-slate-600">🥬 Fresh Stock</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTROL BAR: CATALOG TABS, SORTING & SUB-CATEGORIES -->
+      <section class="space-y-4 no-print">
+        
+        <!-- Main Catalog Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="catalogTabsContainer">
+          <!-- Dynamic Catalog Tabs -->
+        </div>
+
+        <!-- Sub-Category Tag Pills -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="subCategoryPillsContainer">
+          <!-- Dynamic Sub-Category Pills -->
+        </div>
+
+        <!-- Search & Alphabetical Sorting Controls -->
+        <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+          
+          <!-- Search Input -->
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input 
+              type="text" 
+              id="searchInput" 
+              oninput="renderCatalog()" 
+              placeholder="Search by product name or code (e.g., Basmati, Brinjal, Chicken)..." 
+              class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none"
+            />
+          </div>
+
+          <!-- Sorting & Mobile Actions -->
+          <div class="flex items-center gap-2">
+            
+            <!-- Sort by Alphabet Option -->
+            <div class="flex items-center gap-1.5 border border-slate-300 dark:border-slate-600 rounded-xl px-2.5 py-1.5 bg-slate-50 dark:bg-slate-700">
+              <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-brand-600"></i>
+              <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300 whitespace-nowrap">Sort:</label>
+              <select id="sortOption" onchange="renderCatalog()" class="bg-transparent text-xs font-semibold text-slate-800 dark:text-white focus:outline-none cursor-pointer">
+                <option value="AZ">Alphabetical (A - Z)</option>
+                <option value="ZA">Alphabetical (Z - A)</option>
+                <option value="DEFAULT">Original Catalog Order</option>
+              </select>
+            </div>
+
+            <!-- Mobile Buttons -->
+            <button onclick="openAddItemModal()" class="sm:hidden flex items-center gap-1 bg-brand-600 text-white px-3 py-2 rounded-xl text-xs font-bold">
+              <i data-lucide="plus" class="w-4 h-4"></i> Add
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CATALOG GRID -->
+      <section>
+        <div id="catalogGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+          <!-- Rendered via JS -->
+        </div>
+
+        <div id="noResults" class="hidden text-center py-12 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+          <i data-lucide="package-x" class="w-12 h-12 text-slate-300 mx-auto mb-2"></i>
+          <p class="text-slate-600 dark:text-slate-300 font-semibold">No items found matching your filters.</p>
+          <p class="text-xs text-slate-400 mt-1">Try switching sub-categories or search terms.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SLIDING REQUISITION CART DRAWER -->
+  <div id="cartDrawer" class="fixed inset-y-0 right-0 z-40 w-full sm:w-96 bg-white dark:bg-slate-800 shadow-2xl border-l border-slate-200 dark:border-slate-700 flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out no-print">
+    
+    <!-- Drawer Header -->
+    <div class="p-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-800/80">
+      <div class="flex items-center gap-2">
+        <i data-lucide="shopping-cart" class="w-5 h-5 text-brand-600"></i>
+        <h3 class="font-bold text-slate-900 dark:text-white text-base">Requisition Cart</h3>
+        <span id="drawerCartCount" class="bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 text-xs font-bold px-2 py-0.5 rounded-full">0 items</span>
+      </div>
+      <button onclick="toggleCartDrawer()" class="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Cart Items -->
+    <div id="cartItemList" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Dynamic cart items -->
+    </div>
+
+    <!-- Drawer Footer & Actions -->
+    <div class="p-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 space-y-2">
+      <div class="flex justify-between text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
+        <span>Total Line Items:</span>
+        <span id="cartTotalItemCount">0</span>
+      </div>
+
+      <!-- Save Order to History Button -->
+      <button onclick="saveCurrentOrderToHistory()" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md transition">
+        <i data-lucide="bookmark-plus" class="w-4 h-4"></i>
+        Save Order to History
+      </button>
+
+      <!-- Multi-Format Export Buttons -->
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="shareWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow transition">
+          <i data-lucide="message-square" class="w-4 h-4"></i>
+          WhatsApp
+        </button>
+
+        <button onclick="downloadCSV()" class="bg-teal-600 hover:bg-teal-700 text-white py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow transition">
+          <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+          CSV Data
+        </button>
+
+        <button onclick="downloadPNG()" class="bg-sky-600 hover:bg-sky-700 text-white py-2 px-3 rounded-xl font-bold text-xs flext-slate-600 dark:text-slate-300 mb-1">Requisitioner Name</label>
             <div class="space-y-1.5">
               <select id="reqNameSelect" onchange="handleReqNameSelect(this.value)" class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700/50 px-3 py-2 text-xs text-slate-800 dark:text-white focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 <option value="Executive Chef">Executive Chef</option>
